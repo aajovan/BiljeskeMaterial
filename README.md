@@ -1,5 +1,6 @@
 <div align="center">
 <h1>BiljeskeMaterial</h1>
+ <img src="BiljeskeMaterial/res/ikona.ico"/>
 </div>
 
 ![Ikona](BiljeskeMaterial/res/ikona.ico)
