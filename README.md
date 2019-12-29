@@ -9,4 +9,8 @@ Cilj ovog završnog rada jest prikazati izgradnju aplikacije za praćenje bilje�
 * MaterialDesign In XAML
 * Quartz
 
+![Slika 1](projekt_slike/biljeske1.jpg)
+![Slika 2](projekt_slike/biljeske2.jpg)
+![Slika 3](projekt_slike/biljeske3.jpg)
+![Slika 4](projekt_slike/biljeske4.jpg)
 
