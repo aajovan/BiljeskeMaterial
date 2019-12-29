@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="BiljeskeMaterial.KONTROLE.MojeBiljeske"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="17"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone
+          Mode="PrimaryMid"
+          Padding="10" Height="70">
+            <DockPanel Grid.Row="0">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:ColorZone
+                            Mode="Standard"
+                            VerticalAlignment="Center"
+                            Padding="8 4 8 4"
+                            CornerRadius="2"
+                            Margin="16 0 0 0"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon
+                                  Kind="Magnify"
+                                  VerticalAlignment="Center"
+                                  Opacity=".56" />
+                            <TextBox
+                                  Grid.Column="1"
+                                  Margin="8 0 0 0"
+                                  materialDesign:HintAssist.Hint="Pretraživanje"
+                                  materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                  BorderThickness="0"
+                                  MinWidth="200"
+                                  VerticalAlignment="Center" Name="txtFilter" TextChanged="Filter_TextChanged"/>
+                        </Grid>
+                    </materialDesign:ColorZone>
+                </StackPanel>
+            </DockPanel>
+        </materialDesign:ColorZone>
+        <Grid Margin="10" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone
+          Mode="PrimaryLight" VerticalAlignment="Stretch" Grid.Column="0" Padding="20">
+                <ListView Name="mojeBiljeske">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Naslov" DisplayMemberBinding="{Binding Naslov}"/>
+                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding DatumPodsjecanja}"/>
+                            <GridViewColumn Header="Vrijeme" DisplayMemberBinding="{Binding VrijemePodsjecanja}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </materialDesign:ColorZone>
+            <Grid Grid.Column="1" Margin="40 0 30 0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label HorizontalAlignment="Left" Margin="10" Grid.Row="0">Naslov bilješke:</Label>
+                <TextBox
+                    Grid.Row="1"
+                    Margin="10"
+                    Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
+                    VerticalAlignment="Stretch"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    materialDesign:HintAssist.Hint="Naslov" Name="detaljnoNaslov" Text="{Binding ElementName=mojeBiljeske, Path=SelectedItem.Naslov, Mode=OneWay}">
+                </TextBox>
+                <Label HorizontalAlignment="Left" Margin="10" Grid.Row="2">Sadržaj bilješke:</Label>
+                <TextBox
+                    Grid.Row="3"
+                    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+                    Margin="10"
+                    VerticalAlignment="Stretch" Name="detaljnoSadrzaj"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    materialDesign:HintAssist.Hint="Sadržaj bilješke" Text="{Binding ElementName=mojeBiljeske, Path=SelectedItem.Sadrzaj, Mode=OneWay}">
+                </TextBox>
+                <Label HorizontalAlignment="Left" Margin="10" Grid.Row="4">Unesite datum podsjećanja:</Label>
+                <DatePicker
+                    Grid.Row="5"
+                    HorizontalAlignment="Left"
+                    Margin="15 0 0 0"
+                    DisplayDateStart="{x:Static sys:DateTime.Today}" 
+                    SelectedDate="{Binding ElementName=mojeBiljeske, Path=SelectedItem.DatumPodsjecanja, Mode=OneWay}"
+                    x:Name="datum"
+                    Width="200"
+                    materialDesign:HintAssist.Hint="Budući datum">
+                </DatePicker>
+                <Label HorizontalAlignment="Left" Margin="10" Grid.Row="6">Unesite vrijeme podsjećanja:</Label>
+                <materialDesign:TimePicker
+                    Grid.Row="7"
+                    Margin="15 0 0 0"
+                    HorizontalAlignment="Left"
+                     SelectedTime="{Binding ElementName=mojeBiljeske, Path=SelectedItem.VrijemePodsjecanja, Mode=OneWay}"    
+                     Is24Hours="True"
+                     x:Name="vrijeme"
+                     Width="200"
+                    materialDesign:HintAssist.Hint="Vrijeme podsjećanja">
+                </materialDesign:TimePicker>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="8">
+                    <Button Width="150" Click="Ukloni" Margin="10 40 10 10">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding ="{Binding ElementName=mojeBiljeske, Path=SelectedIndex}" Value="-1">
+                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        Ukloni
+                    </Button>
+                    <Button Margin="10 40 10 10" Click="Spremi" Width="150">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                                <Setter Property="IsEnabled" Value="True" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text.Length, ElementName=detaljnoNaslov, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                    <DataTrigger 
+                                      Binding ="{Binding ElementName=mojeBiljeske, Path=SelectedIndex}" Value="-1">
+                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Text.Length, ElementName=detaljnoSadrzaj, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        Spremi
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
